@@ -1,0 +1,22 @@
+<%- include('partials/header.ejs') %>
+
+<form class="form-signin" action="/register" method="POST" enctype="multipart/form-data">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+    <input type="text" class="form-control" name="firstname" placeholder="First name" required autofocus>
+    <input type="text" class="form-control" name="lastname" placeholder="Last name" required>
+    <input type="text" class="form-control" name="username" placeholder="Username" required>
+    <input type="text" class="form-control" name="email" placeholder="Email" required>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputGroupFile01" name="imageId"
+            aria-describedby="inputGroupFileAddon01" accept="image/*" required>
+        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+    </div>
+    <input type="text" class="form-control" name="bio" placeholder="Bio" required>
+    <input type="password" class="form-control" name="password" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block mt-4" type="submit">Sign up</button>
+</form>
+<div class="form-signin">
+    <a href="/campgrounds">Go Back</a>
+</div>
+    
+    <%- include('partials/footer.ejs') %>

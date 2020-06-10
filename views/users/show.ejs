@@ -1,0 +1,56 @@
+<%- include('../partials/header.ejs') %>
+<div class="profile">
+    <div class="row">
+        <div class="col-lg-6 mb-5">
+            <h2><%= user.firstname + ' ' + user.lastname %></h2>
+            <p class="mt-5"><%= user.bio %></p>
+            <h2 class="general-info mt-5">General Info</h2>
+            <ul>
+                <li><strong>First Name </strong><%= user.firstname %></li>
+                <li><strong>Last Name </strong><%= user.lastname %></li>
+                <li><strong>E-mail </strong><%= user.email %></li>
+                <% if (currentUser && !currentUser._id.equals(user._id)) { %>
+                    <li class="mt-5"><a href="/follow/:<%= user._id %>">Follow <%= user.firstname %></a></li>
+                <% } %>
+            </ul>
+        </div>
+        <div class="col-lg-6">
+            <img class="rounded img-fluid" src="<%= user.imageURL %>" alt="<%= user.firstname %>">
+        </div>
+    </div>
+</div>
+
+<!-- campground section -->
+<div class="profile mt-5">
+    <% if (campgrounds.length) { %>
+    <h2><%= user.firstname %>'s Campgrounds</h2>
+    <div class="row text-center">
+        <% campgrounds.forEach((campground) => { %>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card mt-4">
+                <img src="<%= campground.imageURL%>" class="card-img-top" alt="<%= campground.name %>">
+                <div class="card-body">
+                    <h5 class="card-title"><%= campground.name %></h5>
+                    <% if (campground.rating === 0) { %>
+                    <em>No reviews yet.</em>
+                    <% } else { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star <% if (campground.rating > 1.5) { %> checked <% } %>"></span>
+                    <span class="fa fa-star <% if (campground.rating > 2.5) { %> checked <% } %>"></span>
+                    <span class="fa fa-star <% if (campground.rating > 3.5) { %> checked <% } %>"></span>
+                    <span class="fa fa-star <% if (campground.rating > 4.5) { %> checked <% } %>"></span>
+                    <% } %>
+                    <div>
+                        <span class="badge badge-primary mb-2"><i class="fas fa-thumbs-up"></i>
+                            <%= campground.likes.length %></span>
+                    </div>
+                    <a class="btn btn-primary" href="/campgrounds/<%= campground.slug %>">More Info</a>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+    <% } %>
+</div>
+
+<%- include('../partials/footer.ejs') %>
